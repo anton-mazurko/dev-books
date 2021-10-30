@@ -11,6 +11,9 @@
             <button class="btn btn-primary" (click)='toggleImage()'>
               {{ showImage ? 'Hide Image' : 'Show Image'}}
             </button>
+            <button class="btn btn-warning" (click)='changeMethod()'>
+              Click me
+            </button>
             <h4 class="pull-right">
               {{book.bookPrice | currency: 'USD' : true}}
             </h4>
