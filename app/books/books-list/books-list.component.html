@@ -4,8 +4,12 @@
       <div class="col-md-4">
         <div class="thumbnail">
           <img [src]="bookImageUrl"
-               [style.width.px]="imageWidth">
+               [style.width.px]="imageWidth"
+               *ngIf='showImage'>
           <div class="caption">
+            <button class="btn btn-primary" (click)='toggleImage()'>
+              {{ showImage ? 'Hide Image' : 'Show Image'}}
+            </button>
             <h4 class="pull-right">
               {{bookPrice}}
             </h4>
