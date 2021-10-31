@@ -1,17 +1,6 @@
 import {Component} from '@angular/core';
-// import {IBook} from '../book';
-
-interface IBook {
-  bookAuthor: string,
-  bookTitle: string,
-  bookPrice: number,
-  bookDescription: string,
-  publishedOn: Date,
-  inStock: string,
-  bookReviews: number,
-  bookImageUrl: string,
-  hardcover?: boolean
-}
+import {IBook} from '../book';
+import {BookService} from '../book.service';
 
 @Component({
   moduleId: module.id,
@@ -21,32 +10,15 @@ interface IBook {
 
 export class BooksListComponent {
 
+  books: IBook[];
   favoriteMessage: string = "";
   imageWidth: number = 100;
   showImage: boolean = true;
-  booksInStock: number = 2;
+  public booksInStock: number = 2;
 
-  books: IBook[] = [{
-    bookAuthor: "Tom Jones",
-    bookTitle: "War and Peace2",
-    bookPrice: 29.95,
-    bookDescription: "Book of historical fiction",
-    publishedOn: new Date('02/11/1921'),
-    inStock: "yes",
-    bookReviews: 15,
-    bookImageUrl: "app/assets/images/656.jpg",
-    hardcover: false
-  }, {
-    bookAuthor: "Mike Jones",
-    bookTitle: "War and Peace3",
-    bookPrice: 19.95,
-    bookDescription: "Book of historical fiction",
-    publishedOn: new Date('02/11/1921'),
-    inStock: "yes",
-    bookReviews: 18,
-    bookImageUrl: "app/assets/images/656.jpg",
-    hardcover: false
-  }]
+  constructor(private _bookService: BookService){
+    this.books = _bookService.getBooks();
+  }
 
   onFavoriteClicked(message: string): void {
     this.favoriteMessage = message;
