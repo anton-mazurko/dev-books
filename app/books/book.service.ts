@@ -6,6 +6,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/throw';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/catch';
+import { BooksListComponent } from './books-list/books-list.component';
 
 @Injectable()
 export class BookService {
@@ -16,8 +17,14 @@ export class BookService {
     return this._http
       .get('api/books/books.json')
       .map((response: Response) => <IBook[]> response.json())
-      .do(data => console.log(data))
+      // .do(data => console.log(data))
       .catch(this.handleError);
+  }
+
+  getBook(id: string): Observable<IBook> {
+    return this.getBooks()
+    .map((books: IBook[]) => books.find(book => book.id === id))
+    .do(data => console.log(data))
   }
 
   private handleError(error: Response) {
